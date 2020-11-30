@@ -1,24 +1,57 @@
-# README
+## users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|Column      |Type  |Options                 |
+|------------|------|------------------------|
+|nickname    |string|null:false              |
+|mail_address|string|null:false              |
+|password    |string|null:false              |
+|name        |string|null:false, unique: true|
+|furigana    |string|null:false              |
+|birthday    |string|null:false              |
 
-Things you may want to cover:
+### Association
+- has_many :items
+- has_many :purchase_records
 
-* Ruby version
+## items テーブル
 
-* System dependencies
+|Column          |Type      |Options                    |
+|----------------|----------|---------------------------|
+|image           |string    |null:false                 |
+|name            |string    |null:false                 |
+|description     |string    |null:false                 |
+|category        |string    |null:false                 |
+|condition       |string    |null:false                 |
+|delivery_fee    |string    |null:false                 |
+|shipment_source |string    |null:false                 |
+|delivery_time   |string    |null:false                 |
+|price           |string    |null:false                 |
+|user_id         |references|foreign_key: true          |              
 
-* Configuration
+### Association
+- belongs_to :user
+- has_one :purchase_record
 
-* Database creation
+## purchase_records テーブル
 
-* Database initialization
+|Column   |Type      |Options          |
+|---------|----------|-----------------|
+|user_id  |references|foreign_key: true|                 
 
-* How to run the test suite
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :address
 
-* Services (job queues, cache servers, search engines, etc.)
+## addresses テーブル  
 
-* Deployment instructions
+|Column       |Type  |Options    |
+|-------------|------|-----------|
+|postal_code  |string|null:false |
+|prefectures  |string|null:false |
+|municipality |string|null:false |
+|address      |string|null:false |
+|phone_number |string|null:false |
 
-* ...
+### Association
+- belongs_to :purchase_record
