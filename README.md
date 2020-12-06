@@ -1,15 +1,15 @@
 ## users テーブル
 
-|Column            |Type  |Options                 |
-|------------------|------|------------------------|
-|nickname          |string|null:false              |
-|email             |string|null:false              |
-|encrypted_password|string|null:false              |
-|first_name        |string|null:false, unique: true|
-|last_name         |string|null:false, unique: true|
-|first_furigana    |string|null:false              |
-|last_furigana     |string|null:false              |
-|birthday          |date  |null:false              |
+|Column            |Type  |Options                |
+|------------------|------|-----------------------|
+|nickname          |string|null:false             |
+|email             |string|null:false,unique:true |
+|encrypted_password|string|null:false             |
+|first_name        |string|null:false             |
+|last_name         |string|null:false             |
+|first_furigana    |string|null:false             |
+|last_furigana     |string|null:false             |
+|birthday          |date  |null:false             |
 
 ### Association
 - has_many :items
@@ -20,8 +20,8 @@
 |Column            |Type      |Options             |
 |------------------|----------|--------------------|
 |name              |string    |null:false          |
-|description_id    |string    |null:false          |
-|category          |integer   |null:false          |
+|description       |string    |null:false          |
+|category_id       |integer   |null:false          |
 |condition_id      |integer   |null:false          |
 |delivery_fee_id   |integer   |null:false          |
 |shipment_source_id|integer   |null:false          |
@@ -53,6 +53,7 @@
 |prefecture_id|integer|null:false |
 |municipality |string |null:false |
 |address      |string |null:false |
+|building     |string |           |
 |phone_number |integer|null:false |
 
 ### Association
