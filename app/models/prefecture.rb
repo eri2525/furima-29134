@@ -9,8 +9,8 @@ class Prefecture < ActiveHash::Base
     { id: 7, name: '秋田' },
     { id: 8, name: '福島' },
     { id: 9, name: '茨城' },
-    { id: 10, name: '栃木' }
-    { id: 11, name: '群馬' }
+    { id: 10, name: '栃木' },
+    { id: 11, name: '群馬' },
     { id: 12, name: '埼玉' },
     { id: 13, name: '千葉' },
     { id: 14, name: '東京' },
@@ -19,8 +19,8 @@ class Prefecture < ActiveHash::Base
     { id: 17, name: '富山' },
     { id: 18, name: '石川' },
     { id: 19, name: '福井' },
-    { id: 20, name: '山梨' }
-    { id: 21, name: '長野' }
+    { id: 20, name: '山梨' },
+    { id: 21, name: '長野' },
     { id: 22, name: '岐阜' },
     { id: 23, name: '静岡' },
     { id: 24, name: '愛知' },
@@ -29,7 +29,7 @@ class Prefecture < ActiveHash::Base
     { id: 27, name: '京都' },
     { id: 28, name: '大阪' },
     { id: 29, name: '兵庫' },
-    { id: 30, name: '奈良' }
+    { id: 30, name: '奈良' },
     { id: 31, name: '和歌山' },
     { id: 32, name: '鳥取' },
     { id: 33, name: '島根' },
@@ -39,8 +39,8 @@ class Prefecture < ActiveHash::Base
     { id: 37, name: '徳島' },
     { id: 38, name: '香川' },
     { id: 39, name: '愛媛' },
-    { id: 40, name: '高知' }
-    { id: 41, name: '福岡' }
+    { id: 40, name: '高知' },
+    { id: 41, name: '福岡' },
     { id: 42, name: '佐賀' },
     { id: 43, name: '長崎' },
     { id: 44, name: '福岡' },
