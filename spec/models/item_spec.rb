@@ -6,7 +6,7 @@ RSpec.describe Item, type: :model do
 
   describe '商品の出品' do
     context '商品の出品ができる場合' do
-      it 'nameとimageとdescriptionとcategory_idとcondition_idとdelivery_fee_idとdelivery_time_idとpriceがあれば商品の出品ができる' do
+      it 'nameとimageとdescriptionとcategory_idとcondition_idとdelivery_fee_idとdelivery_time_idとprefectureとpriceがあれば商品の出品ができる' do
         expect(@item).to be_valid
       end
       it 'priceの範囲が300~9999999の間であれば商品の出品ができる' do
@@ -39,21 +39,52 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
+      it 'category_idのidが1の時は商品の出品ができない' do
+        @item.category_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
+      end
       it 'condition_idがなければ商品の出品ができない' do
         @item.condition_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
+      end
+      it 'condition_idのidが1の時は商品の出品ができない' do
+        @item.condition_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Condition must be other than 1')
+      end
+      it 'prefectureがなければ商品の出品ができない' do
+        @item.prefecture_id = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it 'prefecture_idのidが1の時は商品の出品ができない' do
+        @item.prefecture_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
       end
       it 'delivery_fee_idがなければ商品の出品ができない' do
         @item.delivery_fee_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
       end
+      it 'delivery_fee_idのidが1の時は商品の出品ができない' do
+        @item.delivery_fee_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Delivery fee must be other than 1')
+      end
       it 'delivery_time_idがなければ商品の出品ができない' do
         @item.delivery_time_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery time can't be blank")
       end
+      it 'delivery_time_idのidが1の時は商品の出品ができない' do
+        @item.delivery_time_id = '1'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Delivery time must be other than 1')
+      end
+
       it 'priceの範囲が300以上でなければ商品の出品ができない' do
         @item.price = 100
         @item.valid?
