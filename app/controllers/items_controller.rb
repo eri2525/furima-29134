@@ -13,6 +13,12 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
+    redirect_to action: :index
+  end
+
   def create
     @item = Item.new(item_params)
     if @item.save
