@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     redirect_to action: :index
-    end
+  end
 
   def update
     if @item.update(item_params)
