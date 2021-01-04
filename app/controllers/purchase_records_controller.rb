@@ -1,9 +1,15 @@
 class PurchaseRecordsController < ApplicationController
   def index
+    #@item = Item.find(params[:id])
+    @user_transaction = UserTransaction.new
+  end
+
+  def new
+    @user_transaction = UserTransaction.new
   end
 
   def create
-    @user_transaction = UserToransaction.new(transaction_params)
+    @user_transaction = UserTransaction.new(transaction_params)
      if @user_transaction.valid?
        @user_transaction.save
        redirect_to action: :index
@@ -12,10 +18,16 @@ class PurchaseRecordsController < ApplicationController
      end
   end
 
+  def show
+    @item = Item.new
+    @items = @purchase_record.item.includes(:user)
+  end
+
   private
   # 全てのストロングパラメーターを1つに統合
  def transaction_params
-  params.require(:user_transaction).permit(:user, :item, :postal_code, :prefecture_id, :municipality, :address, :building, :phone_number, :purchase_record)
+  params.require(:user_transaction).permit(:postal_code, :prefecture_id, :municipality, :address, :building,
+                 :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], purchase_record_id: params[:purchase_record_id] )
  end
 
 end
