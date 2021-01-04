@@ -1,6 +1,6 @@
 class PurchaseRecordsController < ApplicationController
   def index
-    #@item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
     @user_transaction = UserTransaction.new
   end
 
@@ -19,8 +19,7 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def show
-    @item = Item.new
-    @items = @purchase_record.item.includes(:user)
+    @item = Item.find(params[:item_id])
   end
 
   private
