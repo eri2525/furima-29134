@@ -8,7 +8,7 @@ class UserTransaction
     validates :phone_number, exclusion: { in: %w(-) },
                              format: { with: /\A[0-9]{11}\z/ },
                              length: { maximum: 11 }
-    #validates :prefecture_id { other_than: 1 }
+    validates :prefecture_id, numericality: { other_than: 1, message: "Select" }
   end
 
   def save

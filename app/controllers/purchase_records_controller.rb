@@ -11,7 +11,6 @@ class PurchaseRecordsController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @user_transaction = UserTransaction.new(transaction_params)
-    binding.pry
      if @user_transaction.valid?
        @user_transaction.save
        redirect_to root_path
