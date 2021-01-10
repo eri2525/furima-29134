@@ -9,12 +9,14 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def create
+    @item = Item.find(params[:item_id])
     @user_transaction = UserTransaction.new(transaction_params)
+    binding.pry
      if @user_transaction.valid?
        @user_transaction.save
-       redirect_to action: :index
+       redirect_to root_path
      else
-       render action: :new
+       render action: :index
      end
   end
 
@@ -26,7 +28,7 @@ class PurchaseRecordsController < ApplicationController
   # 全てのストロングパラメーターを1つに統合
  def transaction_params
   params.require(:user_transaction).permit(:postal_code, :prefecture_id, :municipality, :address, :building,
-                 :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], purchase_record_id: params[:purchase_record_id] )
+                 :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
  end
 
 end
