@@ -14,7 +14,7 @@ class PurchaseRecordsController < ApplicationController
      if @user_transaction.valid?
       Payjp.api_key = "sk_test_cc067c3cccdaa1abd1c57169"
       Payjp::Charge.create(
-        amount: transaction_params[:price],
+        amount: @item.price,
         card: transaction_params[:token],
         currency: 'jpy'
       )
