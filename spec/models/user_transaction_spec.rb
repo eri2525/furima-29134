@@ -6,7 +6,7 @@ RSpec.describe UserTransaction, type: :model do
 
   describe '商品の購入' do
     context '商品の購入ができる場合' do
-      it 'postal_codeとprefecture_idとmunicipalityとaddressとphone_numberとuser_idとitem_idがあれば商品の購入ができる' do
+      it 'postal_codeとprefecture_idとmunicipalityとaddressとphone_numberとuser_idとitem_idとtokenがあれば商品の購入ができる' do
         expect(@user_transaction).to be_valid
       end
       it 'postal_codeにハイフンがあれば商品の購入ができる' do
@@ -47,6 +47,11 @@ RSpec.describe UserTransaction, type: :model do
         @user_transaction.phone_number = ''
         @user_transaction.valid?
         expect(@user_transaction.errors.full_messages).to include("Phone number can't be blank")
+      end
+      it 'tokenがなければ商品の購入ができない' do
+        @user_transaction.token = ''
+        @user_transaction.valid?
+        expect(@user_transaction.errors.full_messages).to include("Token can't be blank")
       end
       it 'postal_codeにハイフンがない時は商品の購入ができない' do
         @user_transaction.postal_code = 1112222

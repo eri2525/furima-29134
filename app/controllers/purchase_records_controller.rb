@@ -12,12 +12,7 @@ class PurchaseRecordsController < ApplicationController
     @item = Item.find(params[:item_id])
     @user_transaction = UserTransaction.new(transaction_params)
      if @user_transaction.valid?
-      Payjp.api_key = "sk_test_cc067c3cccdaa1abd1c57169"
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: transaction_params[:token],
-        currency: 'jpy'
-      )
+      pay_item
        @user_transaction.save
        redirect_to root_path
      else
@@ -35,5 +30,13 @@ class PurchaseRecordsController < ApplicationController
   params.require(:user_transaction).permit(:postal_code, :prefecture_id, :municipality, :address, :building,
                  :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
  end
-
+ 
+ def pay_item
+  Payjp.api_key ="sk_test_cc067c3cccdaa1abd1c57169"
+  Payjp::Charge.create(
+    amount: @item.price,
+    card: transaction_params[:token],
+    currency: 'jpy'
+  )
+end
 end
