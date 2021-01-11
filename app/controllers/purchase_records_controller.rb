@@ -12,6 +12,12 @@ class PurchaseRecordsController < ApplicationController
     @item = Item.find(params[:item_id])
     @user_transaction = UserTransaction.new(transaction_params)
      if @user_transaction.valid?
+      Payjp.api_key = "sk_test_cc067c3cccdaa1abd1c57169"
+      Payjp::Charge.create(
+        amount: transaction_params[:price],
+        card: transaction_params[:token],
+        currency: 'jpy'
+      )
        @user_transaction.save
        redirect_to root_path
      else
@@ -27,7 +33,7 @@ class PurchaseRecordsController < ApplicationController
   # 全てのストロングパラメーターを1つに統合
  def transaction_params
   params.require(:user_transaction).permit(:postal_code, :prefecture_id, :municipality, :address, :building,
-                 :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
+                 :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
  end
 
 end
