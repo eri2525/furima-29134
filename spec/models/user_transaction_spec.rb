@@ -21,6 +21,10 @@ RSpec.describe UserTransaction, type: :model do
         @user_transaction.phone_number = 11_122_223_333
         expect(@user_transaction).to be_valid
       end
+      it 'buildingがなくても商品の購入ができる' do
+        @user_transaction.building = ''
+        expect(@user_transaction).to be_valid
+      end
     end
     context '商品の購入ができない場合' do
       it 'postal_codeがなければ商品の出品ができない' do
