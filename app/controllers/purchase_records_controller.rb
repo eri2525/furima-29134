@@ -2,13 +2,8 @@ class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :find_set, only: [:index, :create, :show]
   before_action :correct_user, only: [:index]
-  before_action :correct_page, only: [:index]
 
   def index
-    @user_transaction = UserTransaction.new
-  end
-
-  def new
     @user_transaction = UserTransaction.new
   end
 
@@ -48,10 +43,6 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def correct_user
-    redirect_to(root_path) if current_user.id == @item.user_id
-  end
-
-  def correct_page
-    redirect_to(root_path) if @item.purchase_record.present?
+    redirect_to(root_path) if current_user.id == @item.user_id || @item.purchase_record.present?
   end
 end
