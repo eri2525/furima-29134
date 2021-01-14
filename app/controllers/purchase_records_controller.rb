@@ -1,6 +1,7 @@
 class PurchaseRecordsController < ApplicationController
+  before_action :find_set, only: [:index, :create, :show]
+
   def index
-    @item = Item.find(params[:item_id])
     @user_transaction = UserTransaction.new
   end
 
@@ -9,7 +10,6 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @user_transaction = UserTransaction.new(transaction_params)
      if @user_transaction.valid?
       pay_item
@@ -21,7 +21,6 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:item_id])
   end
 
   private
@@ -39,4 +38,9 @@ class PurchaseRecordsController < ApplicationController
     currency: 'jpy'
   )
 end
+
+def find_set
+  @item = Item.find(params[:item_id])
+end
+
 end
