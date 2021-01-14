@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
     @item.destroy
     redirect_to action: :index
   end
-  
+
   def update
     if @item.update(item_params)
       redirect_to action: :show

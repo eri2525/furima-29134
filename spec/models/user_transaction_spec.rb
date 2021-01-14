@@ -14,11 +14,11 @@ RSpec.describe UserTransaction, type: :model do
         expect(@user_transaction).to be_valid
       end
       it 'phone_numberが11桁以内であれば商品の購入ができる' do
-        @user_transaction.phone_number = 11122223333
+        @user_transaction.phone_number = 11_122_223_333
         expect(@user_transaction).to be_valid
       end
       it 'phone_numberにハイフンがなければ商品の購入ができる' do
-        @user_transaction.phone_number = 11122223333
+        @user_transaction.phone_number = 11_122_223_333
         expect(@user_transaction).to be_valid
       end
     end
@@ -54,17 +54,17 @@ RSpec.describe UserTransaction, type: :model do
         expect(@user_transaction.errors.full_messages).to include("Token can't be blank")
       end
       it 'postal_codeにハイフンがない時は商品の購入ができない' do
-        @user_transaction.postal_code = 1112222
+        @user_transaction.postal_code = 1_112_222
         @user_transaction.valid?
         expect(@user_transaction.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it 'phone_numberが11桁以上であれば商品の購入ができない' do
         @user_transaction.phone_number = '111222233334'
         @user_transaction.valid?
-        expect(@user_transaction.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@user_transaction.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
       it 'phone_numberにハイフンがある時は商品の購入ができない' do
-        @user_transaction.phone_number = 111-2222-3333
+        @user_transaction.phone_number = 111 - 2222 - 3333
         @user_transaction.valid?
         expect(@user_transaction.errors.full_messages).to include('Phone number is invalid')
       end
