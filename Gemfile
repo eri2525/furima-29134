@@ -70,3 +70,5 @@ gem 'image_processing', '~> 1.2'
 gem 'active_hash'
 
 gem 'active_storage_validations'
+
+gem 'payjp'
